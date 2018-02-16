@@ -16,7 +16,7 @@ module.exports = (app) => {
 	 	.then((def) => {
    		console.log("def =>", def);
 
-   		res.json(def.results[0].lexicalEntries[0]);
+   		res.json(def);
 		}).catch((err) => {
    		console.error(err);
 		});

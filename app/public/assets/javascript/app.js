@@ -1,6 +1,8 @@
 $('#lookup-btn').on('click', function(event) {
   event.preventDefault();
 
+  $(".definition-container").hide();
+
   let word = $('#word-input').val().trim();
 
   const wordObj = {
@@ -13,6 +15,11 @@ $('#lookup-btn').on('click', function(event) {
     data: wordObj
   }).done((response) => {
     console.log("response", response);
+
+    $("#word").text(word);
+    $("#pronounciation").text(response.results[0].lexicalEntries[0].pronunciations[0].audioFile);
+
+    $(".definition-container").show();
   });
 });
 
