@@ -14,10 +14,12 @@ $('#lookup-btn').on('click', function(event) {
     method: "POST",
     data: wordObj
   }).done((response) => {
-    console.log("response", response);
-
     $("#word").text(word);
-    $("#pronounciation").text(response.results[0].lexicalEntries[0].pronunciations[0].audioFile);
+    //$("#pronounciation").text(response.results[0].lexicalEntries[0].pronunciations[0].audioFile);
+
+    for(let i=0; i<response.results[0].lexicalEntries.length; i++) {
+      $(".definition-container").append(response.results[0].lexicalEntries[i].lexicalCategory);
+    }
 
     $(".definition-container").show();
   });
