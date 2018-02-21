@@ -1,7 +1,19 @@
-$('#lookup-btn').on('click', function(event) {
+$("#lookup-btn").on("click", (event) => {
   event.preventDefault();
 
+  executeLookup();
+});
+
+$("#word-input").keypress((event) => {
+  if(event.keyCode === 13) {
+    executeLookup();
+  }
+});
+
+
+function executeLookup() {
   clearPreviousResults();
+
   $(".definition-display").hide();
 
   let word = $('#word-input').val().trim();
@@ -21,6 +33,10 @@ $('#lookup-btn').on('click', function(event) {
     const lexicalEntries = response.results[0].lexicalEntries;
 
     for(let i=0; i < lexicalEntries.length; i++) {
+      const span = $("<span></span>");
+      span.text(lexicalEntries[i].lexicalCategory.toUpperCase());
+      $(".definition-display").append(span);
+
       const entries = lexicalEntries[i].entries;
 
       for(let j=0; j < entries.length; j++) {
@@ -66,4 +82,4 @@ $('#lookup-btn').on('click', function(event) {
     $("#word").empty();
     $(".definition").empty();
   }
-});
+}
